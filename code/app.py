@@ -11,9 +11,7 @@ app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' #Le indica a alchemy
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
 app.secret_key = 'password'
 api = Api(app) #Permite de una manera muy fácil añadir resources a nuestra app. 
-@app.before_first_request
-def create_tables():
-    db.create_all() #IMPORTANTE: SQLAlchemy CREA LAS BASES DE DATOS POR NOSOTROS. ES IMPORTANTE IMPORTAR LO QUE QUEREAMOS QUE SQLAlchemy cree
+
 
 jwt = JWT(app,authenticate, identity) 
 api.add_resource(Store, '/store/<string:name>')
