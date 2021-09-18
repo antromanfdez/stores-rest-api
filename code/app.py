@@ -1,3 +1,4 @@
+import os 
 from flask import Flask
 from flask.json import jsonify
 from flask_restful import  Api
@@ -6,8 +7,9 @@ from security import authenticate, identity
 from resources.user import UserRegister
 from resources.item import Item, ItemList
 from resources.store import Store, StoreList
+
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///data.db' #Le indica a alchemy que la db se encuentra en el root de nuestro proyect
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite://data.db') #Variable de entorno del SO de heroky para DB postgres de heroku y sqlite si no se encuentra database en el SO
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
 app.secret_key = 'password'
 api = Api(app) #Permite de una manera muy fácil añadir resources a nuestra app. 
