@@ -14,7 +14,7 @@ if uri.startswith("postgres://"):
 # rest of connection code using the connection string `uri`
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DATABASE_URL','sqlite://data.db') #Variable de entorno del SO de heroky para DB postgres de heroku y sqlite si no se encuentra database en el SO
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get(uri,'sqlite://data.db') #Variable de entorno del SO de heroky para DB postgres de heroku y sqlite si no se encuentra database en el SO
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = 'False'
 app.secret_key = 'password'
 api = Api(app) #Permite de una manera muy fácil añadir resources a nuestra app. 
